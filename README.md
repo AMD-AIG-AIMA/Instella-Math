@@ -60,6 +60,15 @@ We conduct GRPO after SFT using [VERL](https://github.com/volcengine/verl).
 ### Installation
 Please download the training docker from .
 
+### Data Preparation
+Run the following commands to prepare the RL data:
+```bash
+cd verl
+python examples/data_preprocess/big_math.py
+python examples/data_preprocess/deep_math.py
+python examples/data_preprocess/deepscaler.py
+```
+
 ### Training
 ```bash
 cd verl
