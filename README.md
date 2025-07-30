@@ -76,9 +76,23 @@ sbatch ./scripts/run_grpo_multi_nodes.sh
 ```
 
 ## Evaluation
+Our evaluations are based on the [DeepScaleR](https://github.com/rllm-org/rllm/tree/deepscaler) codebase. All our evaluations are done on a single node with 8 AMD Instinct™ MI300X GPUs.
 
+Run the following commands to setup the evaluation environment:
+```bash
+# For AMD GPUs:
+cd evals
+# Start the docker container:
+bash start_docker.sh
+docker exec -it instella-math-eval bash
+# Install dependencies
+bash install_setup.sh
+```
+All the processed test datasets are avilable in `evals/deepscaler/data_processed`. Directly run the following command to reproduce our results:
+```bash
+bash run_eval_math.sh
+```
 
- 
 ## Acknowledgement
 This codebase is built from [VERL](https://github.com/volcengine/verl). 
 
