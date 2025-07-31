@@ -37,22 +37,35 @@ print(tokenizer.decode(tokens[0], skip_special_tokens=False))
 ```
 
 ## Supervised Fine-tuning (SFT)
+We conducted two-stage math SFT to enhance the math capabilities of the base [Instella-3B-Instruct](https://huggingface.co/amd/Instella-3B-Instruct) model.
+### Stage 1
+We use the [Instella](https://github.com/AMD-AIG-AIMA/Instella) codebase for the stage 1 math SFT, where the model is trained on the [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) dataset with 4096 context length. Please follow the [installation guide](https://github.com/AMD-AIG-AIMA/Instella?tab=readme-ov-file#installation) to set up the environment.
 
-### Installation
-
-### Data Preparation
-Run the following commands to prepare the SFT data:
+Run the following commands to prepare the stage 1 math SFT data:
 ```bash
-bash scripts/prepare_sft_data.sh
-```
-### Training 
-Launch the SFT job with the [SFT config file](./configs/instella-3b-sft.yaml):
-
-```
-torchrun --nproc_per_node=8 scripts/train.py configs/instella-3b-sft.yaml
+git clone https://github.com/AMD-AIG-AIMA/Instella.git
+cd Instella
+bash scripts/prepare_math_sft_data.sh
 ```
 
-Note: please make sure to update `load_path` to your final pretrain checkpoint.
+Launch the SFT job with the [SFT config file](https://github.com/AMD-AIG-AIMA/Instella/blob/main/configs/instella-3b-sft-math-stage1.yaml):
+
+```
+torchrun --nproc_per_node=8 scripts/train.py configs/instella-3b-sft-math-stage1.yaml
+```
+
+Note: You need to convert the Huggingface [Instella-3B-Instruct](https://huggingface.co/amd/Instella-3B-Instruct) checkpoint to PyTorch format and then update `load_path` in the config file to the converted model checkpoint. Please see the instruction for checkpoint conversion [here](https://github.com/AMD-AIG-AIMA/Instella/tree/instella-long?tab=readme-ov-file#base-model-preparation).
+
+### Stage 2
+
+In the stage 2 math SFT, we continue to train the model on the English subset of the [AM-DeepSeek-R1-Distilled-1.4M](https://huggingface.co/datasets/a-m-team/AM-DeepSeek-R1-Distilled-1.4M) dataset with 1.3M samples, and increase the context length to 32K. The training is based on [open-instruct](https://github.com/allenai/open-instruct/tree/bcb991d4d9b297dc301e03ebaaa5d80dd76bb384/). To run the stage 2 math SFT training:
+
+```
+cd sft
+
+bash scripts/finetune_with_accelerate_config_stage3.sh configs/train_configs/instella/instella-3b-sft-math-stage2.yaml
+```
+Note: Please update `model_name_or_path` in the [config](./sft/configs/train_configs/instella/instella-3b-sft-math-stage2.yaml) to your stage 1 math SFT model. You need to convert the checkpoint to the Huggingface format (see the instruction [here](https://github.com/AMD-AIG-AIMA/Instella/tree/instella-long?tab=readme-ov-file#direct-preference-optimization-dpo)).
 
 ## Reinforcement Learning (GRPO)
 We conduct GRPO after SFT using [VERL](https://github.com/volcengine/verl). 
