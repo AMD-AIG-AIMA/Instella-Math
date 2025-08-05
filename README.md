@@ -71,7 +71,10 @@ Note: Please update `model_name_or_path` in the [config](./sft/configs/train_con
 We conduct GRPO after SFT using [VERL](https://github.com/volcengine/verl). 
 
 ### Installation
-Please download the training docker from .
+Run the following command to setup the docker image `rocm6.3.4:vllm-0.8.5-numa-patch-ubuntu-22.04-cascade-fix`
+```bash
+docker build -f docker/dockerfile -t rocm6.3.4:vllm-0.8.5-numa-patch-ubuntu-22.04-cascade-fix .
+```
 
 ### Data Preparation
 Run the following commands to prepare the RL data:
