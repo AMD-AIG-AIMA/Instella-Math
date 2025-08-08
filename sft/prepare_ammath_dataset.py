@@ -16,12 +16,11 @@ features = Features({
         }
     ]
 })
-# Take downloading "am_0.9M_sample_1k.jsonl" as an example.
+# merge am_0.5M and am_0.9M subset
 data1 = load_dataset('a-m-team/AM-DeepSeek-R1-Distilled-1.4M', 'am_0.5M', features=features)
 data2 = load_dataset('a-m-team/AM-DeepSeek-R1-Distilled-1.4M', 'am_0.9M', features=features)
 data = concatenate_datasets([data1['train'], data2['train']])
  
-# Rename the column "conversations" to "messages"
 # Define a filter function to keep only English messages
 def is_english(example):
     messages = example["messages"]
@@ -35,6 +34,7 @@ def is_english(example):
 
 # Apply filter to dataset
 data_eng = data.filter(is_english, num_proc=128)
+
 # You can push the dataset to the hub using push_to_hub
 repo_id="YOUR_AMMATH_DATASET"
 data_eng['train'].push_to_hub(
