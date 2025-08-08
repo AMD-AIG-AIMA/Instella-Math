@@ -110,7 +110,8 @@ bash run_eval_math.sh
 ```
 
 ## Acknowledgement
-This codebase is built from [VERL](https://github.com/volcengine/verl). 
+The RL training codebase is built from [VERL](https://github.com/volcengine/verl). 
+The evaluation codebase is built [DeepScaleR](https://github.com/rllm-org/rllm/tree/deepscaler).
 
 ## License
 
