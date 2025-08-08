@@ -58,14 +58,14 @@ Note: You need to convert the Huggingface [Instella-3B-Instruct](https://hugging
 
 ### Stage 2
 
-In the stage 2 math SFT, we continue to train the model on the English subset of the [AM-DeepSeek-R1-Distilled-1.4M](https://huggingface.co/datasets/a-m-team/AM-DeepSeek-R1-Distilled-1.4M) dataset with 1.3M samples, and increase the context length to 32K. The training is based on [open-instruct](https://github.com/allenai/open-instruct/tree/bcb991d4d9b297dc301e03ebaaa5d80dd76bb384/). To run the stage 2 math SFT training:
+In the stage 2 math SFT, we continue to train the model on the English subset of the [AM-DeepSeek-R1-Distilled-1.4M](https://huggingface.co/datasets/a-m-team/AM-DeepSeek-R1-Distilled-1.4M) dataset with 1.3M samples, and increase the context length to 32K. We provide a [script](./sft/prepare_ammath_dataset.py) to prepare the dataset for training. The training is based on [open-instruct](https://github.com/allenai/open-instruct/tree/bcb991d4d9b297dc301e03ebaaa5d80dd76bb384/). To run the stage 2 math SFT training:
 
 ```
 cd sft
 
 bash scripts/finetune_with_accelerate_config_stage3.sh configs/train_configs/instella/instella-3b-sft-math-stage2.yaml
 ```
-Note: Please update `model_name_or_path` in the [config](./sft/configs/train_configs/instella/instella-3b-sft-math-stage2.yaml) to your stage 1 math SFT model. You need to convert the checkpoint to the Huggingface format (see the instruction [here](https://github.com/AMD-AIG-AIMA/Instella/tree/instella-long?tab=readme-ov-file#direct-preference-optimization-dpo)).
+Note: Please update `model_name_or_path` in the [config](./sft/configs/train_configs/instella/instella-3b-sft-math-stage2.yaml) to your stage 1 math SFT model. You need to convert the checkpoint to the Huggingface format (see the instruction [here](https://github.com/AMD-AIG-AIMA/Instella/tree/instella-long?tab=readme-ov-file#direct-preference-optimization-dpo)). In addition, please update `dataset_name` to the Huggingface repo of your processed dataset.
 
 ## Reinforcement Learning (GRPO)
 We conduct GRPO after SFT using [VERL](https://github.com/volcengine/verl). 

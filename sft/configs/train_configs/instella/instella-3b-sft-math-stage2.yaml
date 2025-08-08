@@ -2,7 +2,7 @@ model_name_or_path: instella-3b-sft-math-stage1
 use_flash_attn: true
 tokenizer_name: amd/Instella-3B-Math
 use_slow_tokenizer: false
-dataset_name: koajoel/AM-DeepSeek-R1-Distilled-1.4M-English
+dataset_name: YOUR_AMMATH_DATASET
 max_seq_length: 32768
 gradient_checkpointing: true
 preprocessing_num_workers: 128
