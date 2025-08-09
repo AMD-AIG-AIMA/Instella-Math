@@ -113,8 +113,8 @@ The evaluation codebase is built from [DeepScaleR](https://github.com/rllm-org/r
 
 ## License
 
-- The Instella-3B-MATH models are licensed for academic and research purposes under a ResearchRAIL license. 
-- Refer to the [LICENSE](./LICENSE) and [NOTICES](./NOTICES) files for more information.
+- The Instella-3B-Math models are licensed for academic and research purposes under a ResearchRAIL license. 
+- Refer to the [LICENSE](./LICENSE) and [NOTICE](./NOTICE) files for more information.
 
 ## Citations
 Feel free to cite our Instella-3B models and give us a star⭐ if you find our work helpful :)
