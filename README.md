@@ -2,13 +2,10 @@
   <br>
   <br>
   <h1>Instella-Math✨: Fully Open Language Model with Reasoning Capability</h1>
-<a href='https://huggingface.co/AIG-GenAI/Instella-3B-Math'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
-<a href='https://rocm.blogs.amd.com/artificial-intelligence/introducing-instella-3B/README.html'><img src='https://img.shields.io/badge/Technical-Blog-red'></a> 
+<a href='https://huggingface.co/amd/Instella-3B-Math'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue'></a>
+<a href='https://rocm.blogs.amd.com/artificial-intelligence/instella-math-language/README.html'><img src='https://img.shields.io/badge/Technical-Blog-red'></a> 
 </div>
 
-
-
-[^1]: Here even for instruct models, we compared against pre-training tokens as 1) exact open weigth instruct model training token numbers are unknown, and 2) adding instruct model training tokens (in billions) leads to marginally insignificant shift in trends.
 ## Getting Started
 
 ### Example Usage
@@ -112,7 +109,7 @@ bash run_eval_math.sh
 ## Acknowledgement
 The RL training codebase is built from [VERL](https://github.com/volcengine/verl). 
 
-The evaluation codebase is built [DeepScaleR](https://github.com/rllm-org/rllm/tree/deepscaler).
+The evaluation codebase is built from [DeepScaleR](https://github.com/rllm-org/rllm/tree/deepscaler).
 
 ## License
 

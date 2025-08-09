@@ -214,6 +214,23 @@ def select_reward_fn(data_source):
     if data_source == 'lighteval/MATH':
         from verl.utils.reward_score import math
         return math.compute_score
+    if data_source == 'ttt_bench':
+        import re
+        from deepscaler.rewards.math_utils.utils import extract_answer
+
+        def compute_score(solution_str, ground_truth):
+            extracted_response = extract_answer(solution_str)
+            if not extracted_response:
+                return 0
+            extracted_values = re.findall(r"[A-Z]", extracted_response)
+            extracted_values_gt = re.findall(r"[A-Z]", ground_truth)
+            # single answer is correct:
+            for ans in extracted_values:
+                if ans in extracted_values_gt:
+                    return 1.
+            else:
+                return 0
+        return compute_score
     else:
         # from deepscaler.rewards.math_reward import deepscaler_reward_fn
         # return deepscaler_reward_fn
